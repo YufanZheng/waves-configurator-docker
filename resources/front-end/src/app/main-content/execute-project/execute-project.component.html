@@ -1,0 +1,120 @@
+<div [hidden]="waiting" class="container">
+  <div class="row">
+    <div class="col-xs-8">
+      <h2>
+        You have uploaded project: <mark class="text-warning">{{projectName}}</mark> 
+      </h2>
+      <p>
+        The project configuration is located at <span class="text-primary">{{location}}.</span>
+      </p>
+    </div>
+    <div class="col-xs-4">
+      <p style="padding: 20px"></p>
+      <button type="button" class="btn btn-success" (click)="execute()">Execute Program </button>
+      <button type="button" class="btn btn-danger" (click)="stop()">Stop Program </button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+      <ul class="nav nav-tabs" role="tablist">
+        <li [class.active]="shown=='configuration'" role="tablist">
+          <a (click)="selectConfigTable()">Configuration Table</a>
+        </li>
+        <li [class.active]="shown=='submitLogs'" role="tablist">
+          <a (click)="selectSubmitLogs()">Submission Logs</a>
+        </li>
+        <li [class.active]="shown=='executionLogs'" role="tablist">
+          <a (click)="selectExecutionLogs()">Execution Logs</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div 
+          [class.active.in]="shown=='configuration'"
+          class="tab-pane">
+          <div class="row">
+            <h2 class="col-xs-6">Configuration table</h2>
+            <div class="col-xs-2">
+                <label class="label-control">Rows on page</label>
+                <select class="form-control input-sm" [(ngModel)]="rowsOnPage">
+                    <option [ngValue]="5">5</option>
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="15">15</option>
+                </select>
+            </div>
+            <div class="col-xs-4">
+                <div class="row">
+                    <label class="col-xs-12 label-control">Sort by</label>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <select class="form-control input-sm" [(ngModel)]="sortBy">
+                            <option ngValue="name">Name</option>
+                            <option ngValue="value">Value</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="row">
+                        <select class="form-control input-sm" [(ngModel)]="sortOrder">
+                            <option ngValue="asc">Ascending</option>
+                            <option ngValue="desc">Descending</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading">Configuration</div>
+              <table class="table table-striped" [mfData]="properties | dataFilter : filterQuery" #mf="mfDataTable"
+                    [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                  <thead>
+                  <tr>
+                      <th style="width: 20%">
+                          <mfDefaultSorter by="name">Property Name</mfDefaultSorter>
+                      </th>
+                      <th style="width: 80%">
+                          <mfDefaultSorter by="value">Configuration Value</mfDefaultSorter>
+                      </th>
+                  </tr>
+                  <tr>
+                      <th colspan="5">
+                          Filter by name:
+                          <input class="form-control" [(ngModel)]="filterQuery"/>
+                      </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of mf.data">
+                      <td>{{item.name}}</td>
+                      <td>{{item.value}}</td>
+                  </tr>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                      <td colspan="5">
+                          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                      </td>
+                  </tr>
+                  </tfoot>
+              </table>
+          </div>
+        </div>
+        <div
+            [class.active.in]="shown=='submitLogs'" 
+            class="tab-pane">
+            <section [innerHTML]="sampleContent" highlight-js-content=".highlight"></section>
+            <h4 class="lead text-center"><strong>Submission Logs</strong></h4>
+            <textarea #submitLogs class="form-control" style="min-height:800px"></textarea>
+        </div>
+        <div
+          [class.active.in]="shown=='executionLogs'" 
+          class="tab-pane">
+          <h4 class="lead text-center"><strong>Execution Logs</strong></h4>
+          <textarea #executionLogs class="form-control" style="min-height:800px"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<waiting-page [waiting]="waiting" [waitMsg]="waitMsg"></waiting-page>

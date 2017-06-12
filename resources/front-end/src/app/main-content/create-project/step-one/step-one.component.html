@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <!-- Progress Bar -->
+  <div class="row step-bar">
+    <ul class="progressbar">
+      <li class="active" (click)="stepChange(1)">Project Information</li>
+      <li>Cluster</li>
+      <li>Workflow</li>
+      <li>Monitorings Metrics</li>
+    </ul>
+  </div>
+  <!-- Title -->
+  <div class="row">
+    <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+      <h3>Step 1 : Create a New Project</h3>
+    </div>
+  </div>
+  <!-- Form -->
+  <form class="form-horizontal">
+    <!-- Form Groups -->
+    <div class="form-group">
+      <label class="control-label col-xs-2 col-sm-2 col-md-2">Project Name :</label>
+      <div class="col-xs-9 col-sm-9 col-md-9">
+        <input #projName="ngModel" name="name" type="text" class="form-control" placeholder="Enter a project name" required pattern="^[a-zA-Z0-9]*$" [(ngModel)]="project.name">
+        <div *ngIf="projName.errors && (projName.dirty || projName.touched)" class="alert alert-danger">    
+            <div [hidden]="!projName.errors.required">
+                Please enter a name.
+            </div>
+            <div [hidden]="!projName.errors.pattern">
+                The project name should only contain digitals, characters and without any empty space.
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-2 col-sm-2 col-md-2">License :</label>
+      <div class="col-xs-9 col-sm-9 col-md-9"> 
+        <select name="license" class="form-control selectpicker" [(ngModel)]="project.license">
+          <option *ngFor="let license of licenseList" [ngValue]="project.license">{{ license }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-2 col-sm-2 col-md-2">Description :</label>
+      <div class="col-xs-9 col-sm-9 col-md-9"> 
+        <input name="description" type="text" class="form-control" placeholder="A short description for your project" [(ngModel)]="project.description">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-2 col-sm-2 col-md-2">Version :</label>
+      <div class="col-xs-9 col-sm-9 col-md-9"> 
+        <input name="version" type="text" class="form-control" value="1.0" placeholder="Version Information" [(ngModel)]="project.version">
+      </div>
+    </div>
+    <!-- Buttons -->
+    <div class="row">
+      <div class="col-xs-11 col-sm-11 col-md-11">
+        <div class="pull-right">
+          <button type="button" class="btn btn-danger" routerLink="/" routerLinkActive="active">
+            <span class="glyphicon glyphicon-remove"></span>
+            Cancel
+          </button>
+          <button type="button" class="btn btn-info" (click)="stepChange(2)">
+            Next 
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

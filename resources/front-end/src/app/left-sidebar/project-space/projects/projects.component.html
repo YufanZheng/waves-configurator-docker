@@ -1,0 +1,51 @@
+<div class="panel-group" id="accordion" *ngIf="projects.length != 0">
+  <div class="panel panel-success" *ngFor="let project of projects">
+    <div class="panel-heading text-primary">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#{{project}}">
+              <span class="glyphicon glyphicon-folder-close"></span>
+              {{project}}
+              <!-- <span class="glyphicon glyphicon-trash right"></span> -->
+            </a>
+        </h4>
+    </div>
+    <div id="{{project}}" class="panel-collapse collapse">
+        <div class="panel-body">
+            <table class="table">
+                <tr (mouseenter)="showModsProjInfo=true" (mouseleave)="showModsProjInfo=false">
+                    <td>
+                        <span class="glyphicon glyphicon-indent-left text-primary"></span>
+                        <a href="#">Project Infomation</a>
+                        <a href="#" *ngIf="showModsProjInfo"><span class="glyphicon glyphicon-pencil text-primary right"></span></a>
+                    </td>
+                </tr>
+                <tr (mouseenter)="showModsHostsInfo=true" (mouseleave)="showModsHostsInfo=false">
+                    <td>
+                        <span class="glyphicon glyphicon-flash text-success"></span>
+                        <a href="#">Hosts Infomation</a>
+                        <a href="#" *ngIf="showModsHostsInfo"><span class="glyphicon glyphicon-pencil text-primary right"></span></a>
+                    </td>
+                </tr>
+                <tr (mouseenter)="showModsWorkflow=true" (mouseleave)="showModsWorkflow=false">
+                    <td>
+                        <span class="glyphicon glyphicon-file text-danger"></span>
+                        <a href="#">Workflow</a>
+                        <a href="#" *ngIf="showModsWorkflow"><span class="glyphicon glyphicon-pencil text-primary right"></span></a>
+                    </td>
+                </tr>
+                <tr (mouseenter)="showModsMonitoring=true" (mouseleave)="showModsMonitoring=false">
+                    <td>
+                        <span class="glyphicon glyphicon-comment text-info"></span>
+                        <a href="#">Monitoring</a>
+                        <a href="#" *ngIf="showModsMonitoring"><span class="glyphicon glyphicon-pencil text-primary right"></span></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- If there is no exisiting projects, show this message box. -->
+<div class="alert alert-danger" *ngIf="projects.length == 0">
+  <p class="text-center">You don't have any existing project yet, please click on button to create a new one.</p>
+</div>

@@ -1,0 +1,167 @@
+<div class="container-fluid">
+  <!-- Progress Bar-->
+  <div class="row step-bar">
+    <ul class="progressbar">
+      <li class="active" (click)="stepChange(1)">Project Information</li>
+      <li class="active" (click)="stepChange(2)">Cluster</li>
+      <li>Workflow</li>
+      <li>Monitorings Metrics</li>
+    </ul>
+  </div>
+  <!-- Title -->
+  <div class="row">
+    <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+      <h3 *ngIf="cluster.rspEngine=='unknown'">Step 2.1 : Choose Stream Processing Engine</h3>
+      <h3 *ngIf="cluster.rspEngine=='Storm'">Step 2.2 : Set the Host Configuration</h3>
+    </div>
+  </div>
+  <!-- Choose Engine -->
+  <div *ngIf="cluster.rspEngine=='unknown'" class="row">
+    <div class="col-xs-10 col-md-10 col-xs-offset-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1"> 
+      <div class="col-xs-6 col-md-3">
+        <a class="thumbnail">
+          <img src="assets/img/storm.png" class="image">
+          <div class="middle">
+            <div (click)="chooseEngine('Storm')" class="available-text">Choose</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <a class="thumbnail">
+          <img src="assets/img/spark.png" class="image">
+          <div class="middle">
+            <div class="inavailable-text">Not available</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <a class="thumbnail">
+          <img src="assets/img/heron.png" class="image">
+          <div class="middle">
+            <div class="inavailable-text">Not available</div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-6 col-md-3">
+        <a class="thumbnail">
+          <img src="assets/img/flink.png" class="image">
+          <div class="middle">
+            <div class="inavailable-text">Not available</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Settings for Storm -->
+  <form *ngIf="cluster.rspEngine=='Storm'" class="form-horizontal">
+    <!-- Global Cluster Settings -->
+    <div class="form-group">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-xs-offset-3 col-sm-offset-3 col-md-offset-3 text-right">
+        <label class="control-label">Cluster Type :</label>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2">
+        <select name="clusterType" class="form-control" [(ngModel)]="cluster.type">
+          <option value="Docker">Docker</option>
+          <option value="Hubermetes">Hubermetes</option>
+        </select>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 text-right">
+        <label class="control-label">Supervisor :</label>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2">
+        <select name="clusterSupervisorType" class="form-control" [(ngModel)]="cluster.supervisor">
+          <option value="Supervisord">Supervisord</option>
+        </select>
+      </div>
+    </div>
+    <hr>
+    <!-- Every cluster service settings -->
+    <div *ngFor="let service of cluster.services; let in = index" class="form-group form-group-row">
+      <div class="col-xs-2 col-sm-2 col-md-2 text-right">
+        <label *ngIf="firstAppearance(service.name, cluster.services, in)" class="control-label">{{service.name}} :</label>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2">
+        <select 
+          name="{{service.name}}_type_{{in}}" 
+          (change)="changeDefaultPort($event.target.value, in)"
+          class="form-control">
+          <option *ngFor="let type of service.types" value="{{type}}">{{type}}</option>
+        </select>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2">
+        <input 
+          [(ngModel)]="service.ip" 
+          [class.success]="service.connectionStatus=='yes'"
+          [class.error]="service.connectionStatus=='no'"
+          name="{{service.name}}_ip_{{in}}" 
+          type="text" class="form-control" placeholder="{{service.ipPlaceholder}}">
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+        <label class="control-label text-center">Port :</label>
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+        <input 
+          [(ngModel)]="service.port" 
+          [class.success]="service.connectionStatus=='yes'"
+          [class.error]="service.connectionStatus=='no'"
+          name="{{service.name}}_port_{{in}}" 
+          value="{{service.defaultPort}}" type="text" class="form-control">
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+        <button 
+          *ngIf=" firstAppearanceInType(service.types[0], cluster.services, in) && service.types[0] != 'Storm-Nimbus' && service.types[0] != 'Storm-UI'" 
+          (click)="addService(service, in)" 
+          type="button" class="btn btn-default add">
+          <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
+        <button 
+          *ngIf=" !(firstAppearanceInType(service.types[0], cluster.services, in)) && service.types[0] != 'Storm-Nimbus' && service.types[0] != 'Storm-UI' " 
+          (click)="removeService(in)"
+          type="button" class="btn btn-default remove">
+          <span class="glyphicon glyphicon-trash"></span> Remove
+        </button>
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1 hcenter">
+        <span *ngIf="service.connectionStatus=='yes'" tooltip content='Well connected' class="glyphicon glyphicon-ok text-success"></span>
+        <span *ngIf="service.connectionStatus=='no'" tooltip content='Could not connect to the service' class="glyphicon glyphicon-remove text-danger"></span>
+        <span *ngIf="service.connectionStatus=='unknown'" tooltip content='Unknown connection status' class="glyphicon glyphicon-question-sign text-warning"></span>
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+        <button *ngIf="service.connectionStatus=='no'" tooltip content='Click to deploy the service in cluster' type="button" class="btn btn-success deploy">
+          Deploy
+        </button>
+      </div>
+    </div>
+    <!-- Buttons -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-11 col-sm-11 col-md-11">
+          <div class="pull-right">
+            <button type="button" class="btn btn-danger" routerLink="/" routerLinkActive="active">
+            <span class="glyphicon glyphicon-remove step"></span>
+              Cancel
+            </button>
+            <button type="button" class="btn btn-default" (click)="chooseEngine('unknown')">
+              <span class="glyphicon glyphicon-retweet"></span>
+              Switch Engine
+            </button>
+            <button type="button" class="btn btn-primary" 
+              (click)="checkConnectionForAll()"
+              >
+              <span class="glyphicon glyphicon-pawn"></span>
+              Check Connection
+            </button>
+            <button type="button" class="btn btn-default" (click)="stepChange(1)">
+              <span class="glyphicon glyphicon-arrow-left"></span>
+              Previous
+            </button>
+            <button type="button" class="btn btn-info" (click)="stepChange(3)">
+              Next 
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

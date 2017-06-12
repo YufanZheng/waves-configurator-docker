@@ -1,0 +1,171 @@
+h3 {
+    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+hr {
+    margin-top: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    border-top: 1px solid #1f1209;
+    box-shadow: 0 5px 5px -6px #333;
+}
+
+.form-horizontal {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.btn{
+    margin-left: 8px;
+}
+
+ul.progressbar {
+  width: 100%;
+  counter-reset: step;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+}
+
+.progressbar li {
+  list-style-type: none;
+  float: left;
+  width: 25%;
+  position: relative;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  color: #546A79;
+}
+
+.progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  display: block;
+  text-align: center;
+  margin: 0 auto 12px auto;
+  margin-top: 4px;
+  border-radius: 50%;
+  background-color: #E3E3E3;
+}
+
+.progressbar li:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #E3E3E3;
+  /*lines */
+  top: 14px;
+  left: -50%;
+  z-index: -1;
+}
+
+.progressbar li:first-child:after {
+  content: none;
+}
+
+.progressbar li.active {
+  color: #546A79;
+}
+
+.progressbar li.active:hover {
+  cursor: pointer;
+}
+
+.progressbar li.active:before {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  border-color: #0073CF;
+  color: white;
+  background-color: #0073CF;
+  margin: 0 auto 8px auto;
+}
+
+/* this is where the change is just added .active class to li:after */
+.progressbar li.active + li.active:after {
+  background-color: #0073CF;
+}
+
+.btn:not(.add):not(.remove):not(.deploy) {
+    margin-left: 8px;
+    margin-top: 15px;
+}
+
+.step-bar {
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.thumbnail{
+    width: 100%;
+    display: inline-block;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+}
+
+.thumbnail:hover .image {
+    opacity: 0.3;
+}
+
+.thumbnail:hover .middle {
+    opacity: 1;
+}
+
+.available-text {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    padding: 6px 8px;
+}
+
+.available-text:hover {
+    cursor: pointer;
+}
+
+.inavailable-text {
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 16px;
+    padding: 6px 8px;
+}
+
+.inavailable-text:hover {
+    cursor: not-allowed;
+}
+
+.hcenter {
+    text-align: center;
+}
+
+span.glyphicon-ok,
+span.glyphicon-remove:not(.step),
+span.glyphicon-question-sign {
+    font-size: 1.8em;
+}
+
+input.error { 
+    border: 1px solid red; 
+}
+
+input.success {
+    border: 1px solid green;
+}

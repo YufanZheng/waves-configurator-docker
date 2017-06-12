@@ -1,0 +1,42 @@
+<form>
+  <div class="form-group">
+    <legend>Raw Stream Source Type</legend>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="type" value="WebServices" [(ngModel)]="type">
+        Web Services: The data from a Web Services
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="type" value="File" [(ngModel)]="type">
+        Files: The data come from a local file system
+      </label>
+    </div>
+    <div class="form-check">
+    <label class="form-check-label">
+        <input type="radio" class="form-check-input" name="type" value="Folder" [(ngModel)]="type">
+        Folder: Take all the files in this folder as data resource
+      </label>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="type=='WebServices'">
+    <label>Web Services Url</label>
+    <input type="text" class="form-control" name="url" placeholder="Web Services Url: http://..." [(ngModel)]="url">
+    <small class="form-text text-muted">Please give here your URL for Web Services</small>
+  </div>
+  <div class="form-group" *ngIf="type=='Folder'">
+    <label>Folder</label>
+    <input type="text" class="form-control" name="folderpath" placeholder="Folder Path: file:///..." [(ngModel)]="folderpath">
+    <small class="form-text text-muted">Please give here your path to the folder in local file system</small>
+  </div>
+  <div class="form-group" *ngIf="type=='File'">
+    <label>Single File</label>
+    <input type="text" class="form-control" name="filepath" placeholder="File Path: file:///..." [(ngModel)]="filepath">
+    <small class="form-text text-muted">Please give here your path to the single file in local file system</small>
+  </div>
+  <button type="button" class="btn btn-info" (click)="saveSettings()">Save Settings</button>
+  <button type="button" class="btn btn-default" (click)="detachConnections()">Detach Connections</button>
+  <button type="button" class="btn btn-danger" (click)="deleteComponent()">Delete Component</button>
+</form>
+

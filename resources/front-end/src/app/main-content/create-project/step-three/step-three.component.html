@@ -1,0 +1,161 @@
+<div class="row step-bar"> 
+  <ul class="progressbar">
+      <li class="active" (click)="stepChange(1)">Project Information</li>
+      <li class="active" (click)="stepChange(2)">Cluster</li>
+      <li class="active" (click)="stepChange(3)">Workflow</li>
+      <li>Monitorings Metrics</li>
+  </ul>
+</div>
+<form class="form-horizontal">
+  <div class="col-xs-offset-1 col-sm-offset-1 col-md-offset-1">
+    <h3>Step 3 : Create the Workflow</h3>
+  </div>
+  <div class="container-fluid workspace">
+    <div class="row">
+      <div class="bg-warning sketchpad">
+        <h5>Workflow Space</h5>
+        <div class="droppable col-xs-10 col-sm-10 col-md-10" (click)="selectComponent($event)">
+          <div class="btn-group btn-actions pull-right">
+            <button type="button" class="btn btn-sm btn-success dropdown-toggle action-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Action <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li class="action">Simple Workflow</li>
+              <li class="action">Complex Workflow</li>
+              <li role="separator" class="divider"></li>
+              <li class="action">Remove Selected</li>
+              <li class="action">Remove All</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 selector">
+          <div class="panel-group" id="selector">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#selector" href="#dataSource">Data Sources</a>
+                </h6>
+              </div>
+              <div id="dataSource" class="panel-collapse collapse in">
+                <div 
+                  *ngFor="let dataSource of selector.dataSources"
+                  class="panel-body draggable">
+                  <img [src]="imgSourcePath(dataSource)" class="workflow-logo">
+                  {{dataSource}}
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#selector" href="#functions">Functions</a>
+                </h6>
+              </div>
+              <div id="functions" class="panel-collapse collapse">
+                <div 
+                  *ngFor="let function of selector.functions"
+                  class="panel-body draggable">
+                  <img [src]="imgSourcePath(function)" class="workflow-logo">
+                  {{function}}
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#selector" href="#wavesFilters">Waves Filters</a>
+                </h6>
+              </div>
+              <div id="wavesFilters" class="panel-collapse collapse">
+                <div 
+                  *ngFor="let wavesFilter of selector.wavesFilters"
+                  class="panel-body draggable">
+                  <img [src]="imgSourcePath(wavesFilter)" class="workflow-logo">
+                  {{wavesFilter}}
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#selector" href="#dataAnalysis">Data Analysis</a>
+                </h6>
+              </div>
+              <div id="dataAnalysis" class="panel-collapse collapse">
+                <div 
+                  *ngFor="let analysis of selector.dataAnalysis"
+                  class="panel-body draggable">
+                  <img [src]="imgSourcePath(analysis)" class="workflow-logo">
+                  {{analysis}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="settings">
+        <raw-stream-settings 
+          *ngIf="selectedComponentType=='Raw Stream'" 
+          [componentId]="selectedComponentId"></raw-stream-settings>
+        <rdf-stream-settings 
+          *ngIf="selectedComponentType=='RDF Stream'" 
+          [componentId]="selectedComponentId"></rdf-stream-settings>
+        <document-feed-settings 
+          *ngIf="selectedComponentType=='Document Feed'" 
+          [componentId]="selectedComponentId"></document-feed-settings>
+        <triple-store-settings 
+          *ngIf="selectedComponentType=='Triple Store'" 
+          [componentId]="selectedComponentId"></triple-store-settings>
+        <sparql-endpoint-settings 
+          *ngIf="selectedComponentType=='Sparql Endpoint'" 
+          [componentId]="selectedComponentId"></sparql-endpoint-settings>
+        <external-sources-settings 
+          *ngIf="selectedComponentType=='External Sources'" 
+          [componentId]="selectedComponentId"></external-sources-settings>
+        <rdf-converter-settings 
+          *ngIf="selectedComponentType=='RDF Converter'" 
+          [componentId]="selectedComponentId"></rdf-converter-settings>
+        <compresser-settings 
+          *ngIf="selectedComponentType=='Compresser'" 
+          [componentId]="selectedComponentId"></compresser-settings>
+        <quantitative-filter-settings 
+          *ngIf="selectedComponentType=='Quantitative Filter'" 
+          [componentId]="selectedComponentId"></quantitative-filter-settings>
+        <qualitative-filter-settings 
+          *ngIf="selectedComponentType=='Qualitative Filter'" 
+          [componentId]="selectedComponentId"></qualitative-filter-settings>
+        <semantic-filter-settings 
+          *ngIf="selectedComponentType=='Semantic Filter'" 
+          [componentId]="selectedComponentId"></semantic-filter-settings>
+        <reasoning-filter-settings 
+          *ngIf="selectedComponentType=='Reasoning Filter'" 
+          [componentId]="selectedComponentId"></reasoning-filter-settings>
+        <anomaly-detection-settings 
+          *ngIf="selectedComponentType=='Anomaly Detection'" 
+          [componentId]="selectedComponentId"></anomaly-detection-settings>
+        <empty-settings 
+          *ngIf="selectedComponentType==''"></empty-settings >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-11 col-sm-11 col-md-11">
+        <div class="pull-right">
+          <button type="button" class="btn btn-danger" routerLink="/" routerLinkActive="active">
+            <span class="glyphicon glyphicon-remove"></span>
+            Cancel
+          </button>
+          <button type="button" class="btn btn-default" (click)="stepChange(2)">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Previous
+          </button>
+          <button type="button" class="btn btn-info" (click)="stepChange(4)">
+            Next 
+            <span class="glyphicon glyphicon-arrow-right"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,22 @@
+.btn-block {
+    margin-top: 20px;
+}
+
+.lead {
+    margin-bottom: 10px;
+}
+
+.container{
+    padding-left: 10px;
+    padding-left: 10px;
+}
+
+.nav-tabs > li:hover {
+    cursor: pointer;
+}
+
+textarea {
+    font-family: Tahoma, sans-serif;
+    resize: vertical;
+    margin-bottom: 20px;
+}

@@ -1,0 +1,98 @@
+[
+    {
+        "sourceType": "Raw Stream",
+        "targetType": [
+            "RDF Converter",
+            "Compresser",
+            "Quantitative Filter",
+            "Qualitative Filter"
+        ]
+    },
+    {
+        "sourceType": "RDF Stream",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter"
+        ]
+    },
+    {
+        "sourceType": "Document Feed",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter"
+        ]
+    },
+    {
+        "sourceType": "Triple Store",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter",
+            "Anomaly Detection"
+        ]
+    },
+    {
+        "sourceType": "Sparql Endpoint",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter"
+        ]
+    },
+    {
+        "sourceType": "External Sources",
+        "targetType": [
+            "Anomaly Detection"
+        ]
+    },
+    {
+        "sourceType": "RDF Converter",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter",
+            "Compresser"
+        ]
+    },
+    {
+        "sourceType": "Compresser",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter"
+        ]
+    },
+    {
+        "sourceType": "Quantitative Filter",
+        "targetType": [
+            "Quantitative Filter",
+            "Compresser",
+            "RDF Converter"
+        ]
+    },
+    {
+        "sourceType": "Qualitative Filter",
+        "targetType": [
+            "Quantitative Filter",
+            "Compresser",
+            "RDF Converter"
+        ]
+    },
+    {
+        "sourceType": "Semantic Filter",
+        "targetType": [
+            "Anomaly Detection",
+            "Semantic Filter",
+            "Reasoning Filter"
+        ]
+    },
+    {
+        "sourceType": "Reasoning Filter",
+        "targetType": [
+            "Semantic Filter",
+            "Reasoning Filter"
+        ]
+    },
+    {
+        "sourceType": "Anomaly Detection",
+        "targetType": [
+            
+        ]
+    }
+]

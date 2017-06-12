@@ -1,0 +1,16 @@
+{
+   "Zookeeper":2181,
+   "Kafka":9092,
+   "Redis":6379,
+   "MongoDB":27017,
+   "InfluxDB":8086,
+   "Virtuoso":8890,
+   "RDF4J":8080,
+   "Jena":3030,
+   "Storm-Nimbus":6627,
+   "Storm-UI":8080,
+   "Storm-Supervisor":6700,
+   "Spark-Master":7077,
+   "Spark-UI":4040,
+   "Spark-Worker":8081
+}
