@@ -1,0 +1,23 @@
+{
+   "dataSources":[
+      "Raw Stream",
+      "RDF Stream",
+      "Document Feed",
+      "Triple Store",
+      "Sparql Endpoint",
+      "External Sources"
+   ],
+   "functions":[
+      "RDF Converter",
+      "Compresser",
+      "Quantitative Filter",
+      "Qualitative Filter"
+   ],
+   "wavesFilters":[
+      "Semantic Filter",
+      "Reasoning Filter"
+   ],
+   "dataAnalysis":[
+      "Anomaly Detection"
+   ]
+}

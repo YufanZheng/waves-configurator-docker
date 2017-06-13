@@ -19,32 +19,31 @@ RUN curl -sL https://deb.nodesource.com/setup_$NODEJS_VERSION | bash - && \
 # Install Angular Cli
 RUN npm install -g @angular/cli
 
-# Install useful tools and Supervisord
+# Install nginx
 RUN apt-get update && \
-    apt-get install -y wget supervisor vim software-properties-common net-tools && \
-    add-apt-repository main && \
-    rm -rf /var/lib/apt/lists/* && \
-    apt-get clean
+    apt-get install nginx -y
 
-# Configure Supervisor to display web interface
-RUN rm /etc/supervisor/supervisord.conf
-ADD supervisor/supervisord.conf /etc/supervisor/
-ADD supervisor/angularcli.conf /etc/supervisor/conf.d
+# Configure nginx
+RUN rm /etc/nginx/sites-available/default && rm -rf /etc/nginx/conf.d/*
+COPY nginx/nginx.config /etc/nginx/sites-available/default
+COPY nginx/default.conf /etc/nginx/conf.d/
+RUN service nginx restart
 
-# Directory where the front-end code is located
-ENV FRONT_END_DIR = /opt/front-end
+# Configure work path
+ENV APP_PATH /app
+ENV PATH $APP_PATH/node_modules/@angular/cli/bin/:$PATH
 
-# Add front-end source code
-ADD resources/front-end $FRONT_END_DIR
+# Switch to work path
+RUN mkdir $APP_PATH
+WORKDIR $APP_PATH
 
-# Set working directory
-WORKDIR $FRONT_END_DIR
+COPY resources/front-end .
 
-# Download Node dependencies
-RUN npm install
+RUN npm install \
+  && ng build \
+  && rm -rf /usr/share/nginx/html/* \
+  && mv ./dist/* /usr/share/nginx/html/ \
+  && npm cache clean \
+  && rm -rf ./*
 
-# Forwarding ports for Angular
-EXPOSE 4200 9001
-
-# Start Angular 2.x
-CMD ["supervisord", "-n"]
+CMD ["nginx", "-g", "daemon off;"]

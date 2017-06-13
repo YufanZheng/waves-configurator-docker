@@ -14,9 +14,8 @@ export class StepTwoComponent implements OnInit {
   @Output() stepEvent = new EventEmitter<number>();
   private defaultPort;
 
-  constructor(private service: ProjectDataService, private http: Http) { 
-    this.http.get('src/app/app-data/default-port.json')
-        .subscribe(res => this.defaultPort = res.json());
+  constructor(private service: ProjectDataService) { 
+    this.defaultPort = JSON.parse( this.readStringFromFileAtPath('assets/app-data/default-port.json') );
   }
 
   ngOnInit() { 
@@ -97,4 +96,11 @@ export class StepTwoComponent implements OnInit {
     return true;
   }
 
+  private readStringFromFileAtPath(pathOfFileToReadFrom){
+    var request = new XMLHttpRequest();
+    request.open("GET", pathOfFileToReadFrom, false);
+    request.send(null);
+    var text = request.responseText;
+    return text;
+  }
 }

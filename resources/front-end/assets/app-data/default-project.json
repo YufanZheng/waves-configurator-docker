@@ -1,0 +1,105 @@
+{
+   "project":{
+      "name":"",
+      "description":"",
+      "license":"",
+      "version":"1.0.0"
+   },
+   "cluster":{
+      "rspEngine":"unknown",
+      "type":"Docker",
+      "supervisor":"Supervisord",
+      "services":[
+         {
+            "name":"Coordinator",
+            "types":[
+               "Zookeeper"
+            ],
+            "ip":"",
+            "port":2181,
+            "ipPlaceholder":"IP address",
+            "defaultPort":2181,
+            "connectionStatus":"unknown"
+         },
+         {
+            "name":"Messaging",
+            "types":[
+               "Kafka"
+            ],
+            "ip":"",
+            "port":9092,
+            "ipPlaceholder":"IP address",
+            "defaultPort":9092,
+            "connectionStatus":"unknown"
+         },
+         {
+            "name":"NoSQL DB",
+            "types":[
+               "Redis",
+               "MongoDB",
+               "InfluxDB"
+            ],
+            "ip":"",
+            "port":6379,
+            "ipPlaceholder":"IP address",
+            "defaultPort":6379,
+            "connectionStatus":"unknown"
+         },
+         {
+            "name":"Sparql DB",
+            "types":[
+               "RDF4J",
+               "Virtuoso",
+               "Jena"
+            ],
+            "ip":"",
+            "port":8080,
+            "ipPlaceholder":"IP address",
+            "defaultPort":8080,
+            "connectionStatus":"unknown"
+         },
+         {
+            "name":"RSP Engine",
+            "types":[
+               "Storm-Nimbus"
+            ],
+            "ip":"",
+            "port":6627,
+            "ipPlaceholder":"Nimbus IP address",
+            "defaultPort":6627,
+            "connectionStatus":"unknown"
+         },
+         {
+            "name":"RSP Engine",
+            "types":[
+               "Storm-UI"
+            ],
+            "ip":"",
+            "port":8080,
+            "ipPlaceholder":"UI IP address",
+            "defaultPort":8080,
+            "connectionStatus":"unknown"
+         },
+         {
+            "name":"RSP Engine",
+            "types":[
+               "Storm-Supervisor"
+            ],
+            "ip":"",
+            "port":6700,
+            "ipPlaceholder":"Supervisor IP address",
+            "defaultPort":6700,
+            "connectionStatus":"unknown"
+         }
+      ]
+   },
+   "workflow":{
+      "components":[
+
+      ]
+   },
+   "metrics": {
+       "reporter": "console",
+       "frequency": "5s"
+   }
+}

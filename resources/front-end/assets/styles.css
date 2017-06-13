@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+.component {
+    margin-bottom: 2px;
+    margin-top: 2px;
+    float: left;
+    min-width: 72px;
+    border: 1px solid #333;
+    background-color: white;
+    border-radius: 12%;
+    padding: 3px 3px 1px 3px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    box-sizing: content-box;
+    position: relative;
+}
+
+.component:hover {
+    border: 1px solid orange;
+    cursor: default;
+}
+
+.component.selected-border{
+    border: 2px solid orange;
+}
+
+.component .anchor-out {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    right: 5px;
+    top: 10px;
+    border: 1px solid orange;
+    border-radius: 50%;
+    background-color: orange;
+}
+
+.component .anchor-in {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    right: 5px;
+    top: 24px;
+    border: 1px solid pink;
+    border-radius: 50%;
+    background-color: pink;
+}
+
+.anchor-out:hover {
+    background-color: deepskyblue;
+    cursor: pointer;
+}
+
+.component img{
+    width: 30px;
+    height: auto;
+    display: block;
+    left: 24px;
+    position: absolute;
+}
+
+.component p{
+    padding-top: 30px;
+    font-size: 12px;
+    font-family: "SegoeUI-SemiLight-final", "Segoe UI SemiLight", "Segoe UI WPC Semilight", "Segoe UI", Segoe, Tahoma, Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    color: #777;
+}

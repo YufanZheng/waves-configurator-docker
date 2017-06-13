@@ -33,7 +33,7 @@ export class StepThreeComponent implements OnInit {
   private selector;
 
   constructor(private service: ProjectDataService, private http: Http) { 
-    var text = this.readStringFromFileAtPath('../../../../src/app/app-data/component-list.json');
+    var text = this.readStringFromFileAtPath('assets/app-data/component-list.json');
     this.selector = JSON.parse(text);
     this.selectedComponentType = "";
     this.jsPlumbInstance = JsPlumbSingleton.getInstance();
@@ -132,7 +132,7 @@ export class StepThreeComponent implements OnInit {
   }
 
   private imgSourcePath(type: string){
-    return "src/assets/img/workflow/" + type.toLowerCase().split(' ').join('_') + ".png";
+    return "assets/img/workflow/" + type.toLowerCase().split(' ').join('_') + ".png";
   }
 
   private readStringFromFileAtPath(pathOfFileToReadFrom){

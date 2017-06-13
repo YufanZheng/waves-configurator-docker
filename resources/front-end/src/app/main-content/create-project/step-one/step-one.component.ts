@@ -14,9 +14,8 @@ export class StepOneComponent implements OnInit {
   @Output() stepEvent = new EventEmitter<number>();
   private licenseList = [];
     
-  constructor(private service: ProjectDataService, private http: Http) { 
-    this.http.get('src/app/app-data/license-list.json')
-        .subscribe(res => this.licenseList = res.json());
+  constructor(private service: ProjectDataService) { 
+    this.licenseList = JSON.parse( this.readStringFromFileAtPath('assets/app-data/license-list.json') );
   }
 
   ngOnInit() {
@@ -26,5 +25,13 @@ export class StepOneComponent implements OnInit {
   stepChange(step){
     this.service.setProjectInfo(this.project);
     this.stepEvent.emit(step);
+  }
+
+  private readStringFromFileAtPath(pathOfFileToReadFrom){
+    var request = new XMLHttpRequest();
+    request.open("GET", pathOfFileToReadFrom, false);
+    request.send(null);
+    var text = request.responseText;
+    return text;
   }
 }

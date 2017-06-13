@@ -8,26 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="assets/img/logo.png">
   <!-- Bootstrap CSS : Version 3.3.7 -->
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/monokai_sublime.min.css">
 
 </head>
 <body>
   <app>Loading...</app>
   <!-- JQuery JS : Version 3.2.0 -->
-  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+  <script src="assets/jquery/dist/jquery.min.js"></script>
   <!-- Bootstrap JS : Version 3.3.7 -->
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- jsPlumb JS -->
-  <script src="../node_modules/jsplumb/dist/js/jsplumb.min.js"></script>
-  <script>
-    $(".detachConnection").on( "click", () => {
-      console.log("To detach the connection from " + this.componentId);
-      var conns = jsPlumb.getConnections({ source: this.componentId });
-      console.log(conns);
-    });
-  </script>
+  <script src="assets/jsplumb/dist/js/jsplumb.min.js"></script>
 </body>
 </html>

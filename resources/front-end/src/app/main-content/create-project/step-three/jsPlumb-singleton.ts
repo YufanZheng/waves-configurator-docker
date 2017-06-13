@@ -96,7 +96,7 @@ export class JsPlumbSingleton {
     }
 
     static getLegalConns(){
-        let text = JsPlumbSingleton.readStringFromFileAtPath('../../../../src/app/app-data/legal-connections.json');
+        let text = JsPlumbSingleton.readStringFromFileAtPath('assets/app-data/legal-connections.json');
         let legalConns = JSON.parse(text);
         return legalConns;
     }
