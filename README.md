@@ -11,4 +11,6 @@ To run the image in container
 
 ```docker run -d -p 4200:80 -p 3030:3030 -p 8080:8080 -p 9001:9001 configurator```
 
+The waves configurator is launched at localhost:4200
+
 
