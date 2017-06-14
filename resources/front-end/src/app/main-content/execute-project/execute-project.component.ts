@@ -49,7 +49,7 @@ export class ExecuteProjectComponent implements OnInit {
   }
 
   ngAfterViewInit() {        
-        this.service.highlight(this.submitLogs.nativeElement.querySelector('.typescript'));
+        //this.service.highlight(this.submitLogs.nativeElement.querySelector('.typescript'));
     }
 
   private getProjectInfo(){
@@ -114,14 +114,12 @@ export class ExecuteProjectComponent implements OnInit {
 
   private extractData(data){
     this.location = data.location;
-    for( var property of data.properties ){
-      for( var key in property ){
-        var p = {
-          "name": key,
-          "value": property[key]
-        };
-        this.properties.push(p);
-      }
+    for( var key in data ){
+      var p = {
+        "name": key,
+        "value": data[key]
+      };
+      this.properties.push(p);
     }
   }
 
