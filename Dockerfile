@@ -97,7 +97,7 @@ RUN wget -P /tmp http://mirrors.standaloneinstaller.com/apache/jena/binaries/apa
 #Config and data
 VOLUME /fuseki
 
-# Forwarding ports for supervisor
+# Forwarding ports for Jena Fuseki
 EXPOSE 3030
 
 #############################################################################
@@ -129,4 +129,3 @@ EXPOSE 9001
 
 # Launch parameters
 CMD ["/usr/bin/supervisord", "-n"]
-#CMD ['/bin/bash -c "cd /opt/apache-jena-fuseki && ./fuseki-server --update --mem /wavesRepo"']
