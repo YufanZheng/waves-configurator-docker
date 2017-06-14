@@ -1,4 +1,4 @@
-# Dockerise Waves Configurator Front-End
+# Dockerise Waves Configurator
 Use Docker container to run Waves Configurator Front-End Angular 2.x Code
 
 ## How to launch the program
