@@ -94,7 +94,7 @@ RUN wget -P /tmp http://mirrors.standaloneinstaller.com/apache/jena/binaries/apa
     rm /tmp/apache-jena-fuseki-$JENA_FUSEKI_VERSION.tar.gz && \
     mv /opt/apache-jena-fuseki-$JENA_FUSEKI_VERSION /opt/apache-jena-fuseki
 
-#Config and data
+# Config the volume for data
 VOLUME /fuseki
 
 # Forwarding ports for Jena Fuseki
